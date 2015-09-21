@@ -43,6 +43,7 @@ Puppet::Type.newtype(:firewall) do
   feature :log_level, "The ability to control the log level"
   feature :log_prefix, "The ability to add prefixes to log messages"
   feature :mark, "Match or Set the netfilter mark value associated with the packet"
+  feature :restore_mark, "The ability to restore marks"
   feature :mss, "Match a given TCP MSS value or range."
   feature :tcp_flags, "The ability to match on particular TCP flag settings"
   feature :pkttype, "Match a packet type"
@@ -869,6 +870,14 @@ Puppet::Type.newtype(:firewall) do
 
       value
     end
+  end
+
+  newproperty(:restore_mark, :required_features => :restore_mark) do
+    desc <<-EOS
+       Set to true to restore all marks
+    EOS
+
+    newvalues(:true, :false)
   end
 
   newproperty(:clamp_mss_to_pmtu, :required_features => :iptables) do

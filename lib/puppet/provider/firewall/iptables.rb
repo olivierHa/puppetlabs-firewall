@@ -21,6 +21,7 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
   has_feature :log_level
   has_feature :log_prefix
   has_feature :mark
+  has_feature :restore_mark
   has_feature :mss
   has_feature :tcp_flags
   has_feature :pkttype
@@ -97,6 +98,7 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
     :set_dscp              => '--set-dscp',
     :set_dscp_class        => '--set-dscp-class',
     :set_mark              => mark_flag,
+    :restore_mark          => "--restore-mark --nfmask 0xffffffff --ctmask 0xffffffff",
     :set_mss               => '--set-mss',
     :socket                => "-m socket",
     :source                => "-s",
@@ -144,6 +146,7 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
     :rdest,
     :reap,
     :rsource,
+    :restore_mark,
     :rttl,
     :socket,
     :physdev_is_bridged,
@@ -255,7 +258,7 @@ Puppet::Type.type(:firewall).provide :iptables, :parent => Puppet::Provider::Fir
     :rhitcount, :rttl, :rname, :mask, :rsource, :rdest, :ipset, :jump, :clusterip_new, :clusterip_hashmode,
     :clusterip_clustermac, :clusterip_total_nodes, :clusterip_local_node, :clusterip_hash_init,
     :clamp_mss_to_pmtu, :gateway, :set_mss, :set_dscp, :set_dscp_class, :todest, :tosource, :toports, :to, :checksum_fill, :random, :log_prefix,
-    :log_level, :reject, :set_mark, :match_mark, :mss, :connlimit_above, :connlimit_mask, :connmark, :time_start, :time_stop,
+    :log_level, :reject, :set_mark, :restore_mark, :match_mark, :mss, :connlimit_above, :connlimit_mask, :connmark, :time_start, :time_stop,
     :month_days, :week_days, :date_start, :date_stop, :time_contiguous, :kernel_timezone
   ]
 
